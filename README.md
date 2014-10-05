@@ -1,4 +1,4 @@
-ValueObjectBundle
+DothivValueObjectBundle
 =================
 
-A collection of value objects
+A collection of value objects.

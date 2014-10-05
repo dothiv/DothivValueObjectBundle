@@ -1,0 +1,35 @@
+{
+    "name": "dothiv/dothiv-valueobject-bundle",
+    "type": "symfony-bundle",
+    "description": "dotHIV valueobject bundle for Symfony2 is a collection of value objects.",
+    "keywords": ["valueobject", "symfony2", "bundle"],
+    "homepage": "http://github.com/dotHIV/DothivValueObjectBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "TLD dotHIV Registry GmbH",
+            "homepage": "http://dothiv-registry.net"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/framework-bundle": "~2.3"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+
+    "config": {
+        "bin-dir": "bin"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Dothiv\\Bundle\\ValueObjectBundle": ""
+        }
+    },
+
+    "target-dir": "Dothiv/Bundle/ValueObjectBundle"
+}
