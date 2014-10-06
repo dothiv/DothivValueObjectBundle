@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="DothivValueObjectBundle" default="build">
+    <target name="build"
+            depends="install-deps,prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb"/>
+
+    <target name="test" depends="phpunit"/>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/build/code-browser"/>
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/logs"/>
+        <delete dir="${basedir}/build/pdepend"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/code-browser"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+    </target>
+
+    <target name="lint" description="Perform syntax check of sourcecode files">
+        <apply executable="php" failonerror="true">
+            <arg value="-l"/>
+            <fileset dir="${basedir}/Dothiv">
+                <include name="**/*.php"/>
+                <modified/>
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="${basedir}/bin/phploc">
+            <arg value="--log-csv"/>
+            <arg value="${basedir}/build/logs/phploc.csv"/>
+            <arg path="${basedir}/Dothiv"/>
+        </exec>
+    </target>
+
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend">
+        <exec executable="${basedir}/bin/pdepend">
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
+            <arg value="${basedir}/Dothiv"/>
+        </exec>
+    </target>
+
+    <target name="phpmd-ci"
+            description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+        <exec executable="${basedir}/bin/phpmd">
+            <arg value="${basedir}/Dothiv"/>
+            <arg value="xml"/>
+            <arg value="${basedir}/build/phpmd.xml"/>
+            <arg value="--reportfile"/>
+            <arg value="${basedir}/build/logs/pmd.xml"/>
+        </exec>
+    </target>
+
+    <target name="phpcs-ci"
+            description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+        <exec executable="${basedir}/bin/phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=${basedir}/build/codingstandards/dotHIV"/>
+            <arg value="--extensions=php"/>
+            <arg path="${basedir}/Dothiv"/>
+        </exec>
+    </target>
+
+    <target name="phpcs"
+            description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${basedir}/bin/phpcs">
+            <arg value="--standard=${basedir}/build/codingstandards/preflight"/>
+            <arg value="--extensions=php"/>
+            <arg value="-s"/>
+            <arg path="${basedir}/Dothiv"/>
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec executable="${basedir}/bin/phpcpd">
+            <arg value="--log-pmd"/>
+            <arg value="${basedir}/build/logs/pmd-cpd.xml"/>
+            <arg path="${basedir}/Dothiv"/>
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit" depends="setup-test-files">
+        <exec executable="${basedir}/bin/phpunit" failonerror="true">
+            <arg value="-c"/>
+            <arg value="${basedir}"/>
+        </exec>
+    </target>
+
+    <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="${basedir}/bin/phpcb">
+            <arg value="--log"/>
+            <arg path="${basedir}/build/logs"/>
+            <arg value="--source"/>
+            <arg path="${basedir}/Dothiv"/>
+            <arg value="--output"/>
+            <arg path="${basedir}/build/code-browser"/>
+        </exec>
+    </target>
+
+    <target name="setup-test-files"/>
+
+    <property name="composer" value="composer"/>
+    <target name="install-deps" description="Install the required symfony packages.">
+        <exec executable="${composer}" failonerror="true">
+            <arg value="install"/>
+            <arg value="--dev"/>
+            <arg value="--no-progress"/>
+            <arg value="--no-interaction"/>
+        </exec>
+    </target>
+</project>

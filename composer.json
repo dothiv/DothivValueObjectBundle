@@ -15,9 +15,14 @@
     "require": {
         "php": ">=5.3.9",
         "symfony/framework-bundle": "~2.3"
-    },
-
+    },                                                                                                                                                                     
     "require-dev": {
+        "phploc/phploc": "*",
+        "pdepend/pdepend": "*",
+        "phpmd/phpmd": "*",
+        "squizlabs/php_codesniffer": "*",
+        "sebastian/phpcpd": "*",
+        "covex-nn/phpcb": "*",
         "phpunit/phpunit": "*"
     },
 
