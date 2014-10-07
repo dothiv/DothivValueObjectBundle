@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class HivDomainValue implements StringValue
 {
+
     /**
      * @var string
      */
@@ -95,5 +96,15 @@ class HivDomainValue implements StringValue
     public function toUTF8()
     {
         return idn_to_utf8($this->domain);
+    }
+
+    /**
+     * Parses a UTF8 domain name.
+     *
+     * @return HivDomainValue
+     */
+    public static function createFromUTF8($utf8)
+    {
+        return new HivDomainValue(idn_to_ascii($utf8));
     }
 } 

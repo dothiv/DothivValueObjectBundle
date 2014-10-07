@@ -92,6 +92,19 @@ class HivDomainValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($utf8, $domain->toUTF8());
     }
 
+    /**
+     * @test
+     * @depends      itShouldParseADomain
+     * @group        unit
+     * @group        ValueObject
+     * @dataProvider provideIdnConversionData
+     */
+    public function itShouldConvertUTF8toIDN($idn, $utf8)
+    {
+        $domain = HivDomainValue::createFromUTF8($utf8);
+        $this->assertEquals($idn, (string)$domain);
+    }
+
     public function provideIdnConversionData()
     {
         return array(
