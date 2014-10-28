@@ -77,6 +77,19 @@ class W3CDateTimeValueTest extends \PHPUnit_Framework_TestCase
             array('2014-06-21T00:00:00+00:00', '2014-06-21T00:00:00Z'),
         );
     }
+
+    /**
+     * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseADate
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $v  = new W3CDateTimeValue('2014-06-21T00:00:00+00:00');
+        $v2 = new W3CDateTimeValue($v->toScalar());
+        $this->assertEquals($v->__toString(), $v2->__toString());
+    }
 }
 
 

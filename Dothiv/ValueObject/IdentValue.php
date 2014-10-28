@@ -4,7 +4,7 @@ namespace Dothiv\ValueObject;
 
 use Dothiv\ValueObject\Exception\InvalidArgumentException;
 
-class IdentValue implements StringValue
+class IdentValue implements ValueObjectInterface
 {
     private $ident;
 
@@ -38,9 +38,18 @@ class IdentValue implements StringValue
 
     /**
      * {@inheritdoc}
+     * @Serializer\HandlerCallback("json", direction = "serialization")
      */
     public function __toString()
     {
         return $this->ident;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 }

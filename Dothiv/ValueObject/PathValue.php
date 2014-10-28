@@ -6,7 +6,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class PathValue implements StringValue
+class PathValue implements ValueObjectInterface
 {
     /**
      * @var \SplFileInfo
@@ -39,6 +39,14 @@ class PathValue implements StringValue
     public function __toString()
     {
         return $this->fi->getPathname();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 
     /**

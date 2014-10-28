@@ -8,8 +8,9 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class EmailValue implements StringValue
+class EmailValue implements ValueObjectInterface
 {
+
     /**
      * @var string
      */
@@ -64,14 +65,20 @@ class EmailValue implements StringValue
     }
 
     /**
-     * Converts the value to a string.
-     *
-     * @return string
+     * {@inheritdoc}
      * @Serializer\HandlerCallback("json", direction = "serialization")
      */
     public function __toString()
     {
         return $this->email;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 
     /**

@@ -8,8 +8,9 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class HexValue implements StringValue
+class HexValue implements ValueObjectInterface
 {
+
     private $hex;
 
     /**
@@ -50,5 +51,13 @@ class HexValue implements StringValue
     public function __toString()
     {
         return $this->hex;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 }

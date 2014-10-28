@@ -53,6 +53,19 @@ class IdentValueTest extends \PHPUnit_Framework_TestCase
         $v    = new IdentValue(new IdentValue($data));
         $this->assertEquals($data, (string)$v);
     }
+
+    /**
+     * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseAIdentValue
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $v  = new IdentValue('some-ident');
+        $v2 = new IdentValue($v->toScalar());
+        $this->assertEquals($v->__toString(), $v2->__toString());
+    }
 }
 
 

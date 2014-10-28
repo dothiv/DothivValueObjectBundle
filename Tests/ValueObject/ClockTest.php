@@ -63,6 +63,20 @@ class ClockTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     * @group   ValueObject
+     * @group   Service
+     * @group   Clock
+     * @depends itShouldBeInstantiateable
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $clock  = $this->getTestObject();
+        $clock2 = new ClockValue($this->getTestObject()->toScalar());
+        $this->assertEquals($clock->getNow()->getTimestamp(), $clock2->getNow()->getTimestamp());
+    }
+
+    /**
      * @param \DateTime $date
      *
      * @return ClockValue

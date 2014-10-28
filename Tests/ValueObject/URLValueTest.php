@@ -81,6 +81,19 @@ class URLValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('query=true', $value->getQuery());
         $this->assertEquals('fragment', $value->getFragment());
     }
+
+    /**
+     * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseAnURL
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $v  = new URLValue('https://www.example.com/directory/index.php?query=true#fragment');
+        $v2 = new URLValue($v->toScalar());
+        $this->assertEquals($v->__toString(), $v2->__toString());
+    }
 }
 
 

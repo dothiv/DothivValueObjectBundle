@@ -3,13 +3,12 @@
 namespace Dothiv\ValueObject;
 
 use Dothiv\ValueObject\Exception\InvalidArgumentException;
-
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class URLValue implements StringValue
+class URLValue implements ValueObjectInterface
 {
     /**
      * @var string
@@ -59,14 +58,20 @@ class URLValue implements StringValue
     }
 
     /**
-     * Converts the value to a string.
-     *
-     * @return string
+     * {@inheritdoc}
      * @Serializer\HandlerCallback("json", direction = "serialization")
      */
     public function __toString()
     {
         return $this->url;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 
     /**

@@ -81,6 +81,19 @@ class HivDomainValueTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseADomain
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $v  = new HivDomainValue('click4life.hiv');
+        $v2 = new HivDomainValue($v->toScalar());
+        $this->assertEquals($v->__toString(), $v2->__toString());
+    }
+
+    /**
+     * @test
      * @depends      itShouldParseADomain
      * @group        unit
      * @group        ValueObject

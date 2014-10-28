@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class TwitterHandleValue implements StringValue
+class TwitterHandleValue implements ValueObjectInterface
 {
 
     /**
@@ -51,13 +51,19 @@ class TwitterHandleValue implements StringValue
     }
 
     /**
-     * Converts the value to a string.
-     *
-     * @return string
+     * {@inheritdoc}
      * @Serializer\HandlerCallback("json", direction = "serialization")
      */
     public function __toString()
     {
         return $this->handle;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 } 

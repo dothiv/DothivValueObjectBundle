@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class HivDomainValue implements StringValue
+class HivDomainValue implements ValueObjectInterface
 {
 
     /**
@@ -68,6 +68,14 @@ class HivDomainValue implements StringValue
     public function __toString()
     {
         return $this->domain;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
     }
 
     /**

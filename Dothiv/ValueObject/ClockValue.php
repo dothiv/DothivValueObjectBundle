@@ -5,8 +5,9 @@ namespace Dothiv\ValueObject;
 /**
  * The clock service abstracts the current date.
  */
-class ClockValue
+class ClockValue implements ValueObjectInterface
 {
+
     /**
      * @var \DateTime
      */
@@ -27,4 +28,22 @@ class ClockValue
     {
         return clone $this->clock;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
+    }
+
+    /**
+     * {@inheritdoc}
+     * @Serializer\HandlerCallback("json", direction = "serialization")
+     */
+    public function __toString()
+    {
+        return $this->clock->format(DATE_W3C);
+    }
+
 } 

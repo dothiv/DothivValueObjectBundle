@@ -56,6 +56,19 @@ class EmailValueTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseAnEmail
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $email  = new EmailValue('m@click4life.hiv');
+        $email2 = new EmailValue($email->toScalar());
+        $this->assertEquals($email->__toString(), $email2->__toString());
+    }
+
+    /**
+     * @test
      * @depends itShouldParseAnEmail
      * @group   unit
      * @group   ValueObject

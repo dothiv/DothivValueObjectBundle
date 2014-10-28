@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class W3CDateTimeValue implements StringValue
+class W3CDateTimeValue implements ValueObjectInterface
 {
     /**
      * @var \DateTime
@@ -34,7 +34,7 @@ class W3CDateTimeValue implements StringValue
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      * @Serializer\HandlerCallback("json", direction = "serialization")
      */
     function __toString()
@@ -42,4 +42,11 @@ class W3CDateTimeValue implements StringValue
         return $this->date->format(DATE_W3C);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function toScalar()
+    {
+        return $this->__toString();
+    }
 } 

@@ -89,6 +89,19 @@ class PathValueTest extends \PHPUnit_Framework_TestCase
         $p = PathValue::create(__DIR__);
         $this->assertTrue($p->isDir());
     }
+
+    /**
+     * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseAPath
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $v  = new PathValue('/some/path/with/a/file.txt');
+        $v2 = new PathValue($v->toScalar());
+        $this->assertEquals($v->__toString(), $v2->__toString());
+    }
 }
 
 

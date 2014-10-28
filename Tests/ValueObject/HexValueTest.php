@@ -66,6 +66,19 @@ class HexValueTest extends \PHPUnit_Framework_TestCase
         $v    = new HexValue($data);
         $this->assertEquals('#AAFF99', (string)$v);
     }
+
+    /**
+     * @test
+     * @group   ValueObject
+     * @group   Service
+     * @depends itShouldParseAHexValue
+     */
+    public function itShouldParseItsScalarValue()
+    {
+        $v  = new HexValue('#AAFF99');
+        $v2 = new HexValue($v->toScalar());
+        $this->assertEquals($v->__toString(), $v2->__toString());
+    }
 }
 
 
