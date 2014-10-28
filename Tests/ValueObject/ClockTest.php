@@ -8,7 +8,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @group BusinessBundle
+     * @group ValueObject
      * @group Service
      * @group Clock
      */
@@ -20,7 +20,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @group   BusinessBundle
+     * @group   ValueObject
      * @group   Service
      * @group   Clock
      * @depends itShouldBeInstantiateable
@@ -33,7 +33,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @group   BusinessBundle
+     * @group   ValueObject
      * @group   Service
      * @group   Clock
      * @depends itShouldReturnADate
@@ -48,7 +48,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @group   BusinessBundle
+     * @group   ValueObject
      * @group   Service
      * @group   Clock
      * @depends itShouldBeInstantiateable

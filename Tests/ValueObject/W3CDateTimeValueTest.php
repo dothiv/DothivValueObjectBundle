@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothiv\BusinessBundle\Tests\Entity\ValueObject;
+namespace Dothiv\ValueObject\Tests\Entity\ValueObject;
 
 use Dothiv\ValueObject\W3CDateTimeValue;
 
