@@ -2,6 +2,8 @@
 
 namespace Dothiv\ValueObject;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * The clock service abstracts the current date.
  */
