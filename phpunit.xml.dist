@@ -16,18 +16,9 @@
         </testsuite>
     </testsuites>
 
-    <php>
-        <server name="KERNEL_DIR" value="./Tests/Fixtures/App/app" />
-    </php>
-
     <filter>
         <whitelist>
             <directory>./</directory>
-            <exclude>
-                <directory>./Resources</directory>
-                <directory>./Tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
         </whitelist>
     </filter>
 
