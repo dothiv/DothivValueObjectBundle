@@ -80,6 +80,35 @@ class EmailValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('click4life.hiv', $value->getHostname());
         $this->assertEquals('extension', $value->getExtension());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        EmailValue
+     *
+     * @param EmailValue $testObject
+     * @param EmailValue $compare
+     * @param boolean    $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(EmailValue $testObject, EmailValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new EmailValue('m+extension@click4life.hiv'), new EmailValue('m+extension@click4life.hiv'), true),
+            array(new EmailValue('m+extension@click4life.hiv'), new EmailValue('m@click4life.hiv'), false)
+        );
+    }
 }
 
 

@@ -94,6 +94,35 @@ class URLValueTest extends \PHPUnit_Framework_TestCase
         $v2 = new URLValue($v->toScalar());
         $this->assertEquals($v->__toString(), $v2->__toString());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        URLValue
+     *
+     * @param URLValue $testObject
+     * @param URLValue $compare
+     * @param boolean  $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(URLValue $testObject, URLValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new URLValue('https://www.example.com/directory/'), new URLValue('https://www.example.com/directory/'), true),
+            array(new URLValue('http://www.example.com/directory/'), new URLValue('https://www.example.com/directory/'), false)
+        );
+    }
 }
 
 

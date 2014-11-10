@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class W3CDateTimeValue implements ValueObjectInterface
+class W3CDateTimeValue extends AbstractValueObject implements ValueObjectInterface
 {
     /**
      * @var \DateTime
@@ -49,4 +49,4 @@ class W3CDateTimeValue implements ValueObjectInterface
     {
         return $this->__toString();
     }
-} 
+}

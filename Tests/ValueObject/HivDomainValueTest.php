@@ -125,6 +125,35 @@ class HivDomainValueTest extends \PHPUnit_Framework_TestCase
             array('xn--brger-kva.hiv', 'bürger.hiv')
         );
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        HivDomainValue
+     *
+     * @param HivDomainValue $testObject
+     * @param HivDomainValue $compare
+     * @param boolean        $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(HivDomainValue $testObject, HivDomainValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new HivDomainValue('example.hiv'), new HivDomainValue('example.hiv'), true),
+            array(new HivDomainValue('examples.hiv'), new HivDomainValue('example.hiv'), false)
+        );
+    }
 }
 
 

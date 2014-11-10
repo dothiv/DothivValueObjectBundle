@@ -79,6 +79,35 @@ class HexValueTest extends \PHPUnit_Framework_TestCase
         $v2 = new HexValue($v->toScalar());
         $this->assertEquals($v->__toString(), $v2->__toString());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        HexValue
+     *
+     * @param HexValue $testObject
+     * @param HexValue $compare
+     * @param boolean  $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(HexValue $testObject, HexValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new HexValue('#AAFF99'), new HexValue('#af9'), true),
+            array(new HexValue('#af9'), new HexValue('#abc'), false)
+        );
+    }
 }
 
 

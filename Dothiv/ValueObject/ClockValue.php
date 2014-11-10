@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * The clock service abstracts the current date.
  */
-class ClockValue implements ValueObjectInterface
+class ClockValue extends AbstractValueObject implements ValueObjectInterface
 {
 
     /**
@@ -48,4 +48,4 @@ class ClockValue implements ValueObjectInterface
         return $this->clock->format(DATE_W3C);
     }
 
-} 
+}

@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class EmailValue implements ValueObjectInterface
+class EmailValue extends AbstractValueObject implements ValueObjectInterface
 {
 
     /**
@@ -120,4 +120,4 @@ class EmailValue implements ValueObjectInterface
     {
         return isset($this->parts[$part]) ? $this->parts[$part] : null;
     }
-} 
+}

@@ -90,6 +90,35 @@ class W3CDateTimeValueTest extends \PHPUnit_Framework_TestCase
         $v2 = new W3CDateTimeValue($v->toScalar());
         $this->assertEquals($v->__toString(), $v2->__toString());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        W3CDateTimeValue
+     *
+     * @param W3CDateTimeValue $testObject
+     * @param W3CDateTimeValue $compare
+     * @param boolean          $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(W3CDateTimeValue $testObject, W3CDateTimeValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new W3CDateTimeValue('2014-06-21T00:00:00+00:00'), new W3CDateTimeValue('2014-06-21T00:00:00+00:00'), true),
+            array(new W3CDateTimeValue('2014-06-20T00:00:00+00:00'), new W3CDateTimeValue('2014-06-21T00:00:00+00:00'), false)
+        );
+    }
 }
 
 

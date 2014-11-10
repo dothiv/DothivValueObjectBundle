@@ -79,4 +79,33 @@ class TwitterHandleValueTest extends \PHPUnit_Framework_TestCase
         $v2 = new TwitterHandleValue($v->toScalar());
         $this->assertEquals($v->__toString(), $v2->__toString());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        TwitterHandleValue
+     *
+     * @param TwitterHandleValue $testObject
+     * @param TwitterHandleValue $compare
+     * @param boolean            $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(TwitterHandleValue $testObject, TwitterHandleValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new TwitterHandleValue('@tldhiv'), new TwitterHandleValue('@tldhiv'), true),
+            array(new TwitterHandleValue('@hivtld'), new TwitterHandleValue('@tldhiv'), false)
+        );
+    }
 }

@@ -102,6 +102,35 @@ class PathValueTest extends \PHPUnit_Framework_TestCase
         $v2 = new PathValue($v->toScalar());
         $this->assertEquals($v->__toString(), $v2->__toString());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        PathValue
+     *
+     * @param PathValue $testObject
+     * @param PathValue $compare
+     * @param boolean   $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(PathValue $testObject, PathValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new PathValue('/some/path/with/a/file.txt'), new PathValue('/some/path/with/a/file.txt'), true),
+            array(new PathValue('/some/path/with/a/otherfile.txt'), new PathValue('/some/path/with/a/file.txt'), false)
+        );
+    }
 }
 
 

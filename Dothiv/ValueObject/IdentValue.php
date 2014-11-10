@@ -5,7 +5,7 @@ namespace Dothiv\ValueObject;
 use Dothiv\ValueObject\Exception\InvalidArgumentException;
 use JMS\Serializer\Annotation as Serializer;
 
-class IdentValue implements ValueObjectInterface
+class IdentValue extends AbstractValueObject implements ValueObjectInterface
 {
     private $ident;
 

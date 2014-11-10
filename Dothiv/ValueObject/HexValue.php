@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class HexValue implements ValueObjectInterface
+class HexValue extends AbstractValueObject implements ValueObjectInterface
 {
 
     private $hex;

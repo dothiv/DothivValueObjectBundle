@@ -66,6 +66,35 @@ class IdentValueTest extends \PHPUnit_Framework_TestCase
         $v2 = new IdentValue($v->toScalar());
         $this->assertEquals($v->__toString(), $v2->__toString());
     }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        IdentValue
+     *
+     * @param IdentValue $testObject
+     * @param IdentValue $compare
+     * @param boolean        $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(IdentValue $testObject, IdentValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $testObject->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array(new IdentValue('some-ident'), new IdentValue('some-ident'), true),
+            array(new IdentValue('some-idents'), new IdentValue('some-ident'), false)
+        );
+    }
 }
 
 

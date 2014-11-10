@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class TwitterHandleValue implements ValueObjectInterface
+class TwitterHandleValue extends AbstractValueObject implements ValueObjectInterface
 {
 
     /**
@@ -66,4 +66,4 @@ class TwitterHandleValue implements ValueObjectInterface
     {
         return $this->__toString();
     }
-} 
+}

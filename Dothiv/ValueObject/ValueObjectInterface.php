@@ -17,4 +17,13 @@ interface ValueObjectInterface
      * @return string
      */
     public function __toString();
-} 
+
+    /**
+     * Returns whether this object equals $compare
+     *
+     * @param ValueObjectInterface $compare
+     *
+     * @return bool
+     */
+    public function equals(ValueObjectInterface $compare);
+}

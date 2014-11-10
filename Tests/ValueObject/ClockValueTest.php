@@ -4,7 +4,7 @@ namespace Dothiv\ValueObject\Tests\Service;
 
 use Dothiv\ValueObject\ClockValue;
 
-class ClockTest extends \PHPUnit_Framework_TestCase
+class ClockValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -22,7 +22,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
      * @test
      * @group   ValueObject
      * @group   Service
-     * @group   Clock
+     * @group   ClockValue
      * @depends itShouldBeInstantiateable
      */
     public function itShouldReturnADate()
@@ -35,7 +35,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
      * @test
      * @group   ValueObject
      * @group   Service
-     * @group   Clock
+     * @group   ClockValue
      * @depends itShouldReturnADate
      */
     public function itShouldReturnASpecificDate()
@@ -50,7 +50,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
      * @test
      * @group   ValueObject
      * @group   Service
-     * @group   Clock
+     * @group   ClockValue
      * @depends itShouldBeInstantiateable
      */
     public function itShouldBeImmutable()
@@ -66,7 +66,7 @@ class ClockTest extends \PHPUnit_Framework_TestCase
      * @test
      * @group   ValueObject
      * @group   Service
-     * @group   Clock
+     * @group   ClockValue
      * @depends itShouldBeInstantiateable
      */
     public function itShouldParseItsScalarValue()
@@ -85,4 +85,32 @@ class ClockTest extends \PHPUnit_Framework_TestCase
     {
         return new ClockValue($date);
     }
-} 
+
+    /**
+     * @test
+     * @group   ValueObject
+     * @group   ClockValue
+     *
+     * @param ClockValue $compare
+     * @param boolean    $equals
+     *
+     * @dataProvider itShouldCompareDataProvider
+     */
+    public function itShouldCompare(ClockValue $compare, $equals)
+    {
+        $this->assertEquals($equals, $this->getTestObject()->equals($compare));
+    }
+
+    /**
+     * Test data provider for itShouldCompare
+     *
+     * @return array
+     */
+    public function itShouldCompareDataProvider()
+    {
+        return array(
+            array($this->getTestObject(), true),
+            array($this->getTestObject(new \DateTime('1970-01-01T00:00:00Z')), false)
+        );
+    }
+}

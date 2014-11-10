@@ -6,7 +6,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class PathValue implements ValueObjectInterface
+class PathValue extends AbstractValueObject implements ValueObjectInterface
 {
     /**
      * @var \SplFileInfo

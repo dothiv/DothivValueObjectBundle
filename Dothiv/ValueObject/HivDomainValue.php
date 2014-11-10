@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class HivDomainValue implements ValueObjectInterface
+class HivDomainValue extends AbstractValueObject implements ValueObjectInterface
 {
 
     /**
@@ -115,4 +115,4 @@ class HivDomainValue implements ValueObjectInterface
     {
         return new HivDomainValue(idn_to_ascii($utf8));
     }
-} 
+}
