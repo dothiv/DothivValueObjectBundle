@@ -88,17 +88,18 @@ class ClockValueTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @group   ValueObject
-     * @group   ClockValue
+     * @group        ValueObject
+     * @group        ClockValue
      *
+     * @param ClockValue $testObject
      * @param ClockValue $compare
      * @param boolean    $equals
      *
      * @dataProvider itShouldCompareDataProvider
      */
-    public function itShouldCompare(ClockValue $compare, $equals)
+    public function itShouldCompare(ClockValue $testObject, ClockValue $compare, $equals)
     {
-        $this->assertEquals($equals, $this->getTestObject()->equals($compare));
+        $this->assertEquals($equals, $testObject->equals($compare));
     }
 
     /**
@@ -109,8 +110,8 @@ class ClockValueTest extends \PHPUnit_Framework_TestCase
     public function itShouldCompareDataProvider()
     {
         return array(
-            array($this->getTestObject(), true),
-            array($this->getTestObject(new \DateTime('1970-01-01T00:00:00Z')), false)
+            array($this->getTestObject(new \DateTime('1970-01-01T00:00:00Z')), $this->getTestObject(new \DateTime('1970-01-01T00:00:00Z')), true),
+            array($this->getTestObject(new \DateTime('1971-01-01T00:00:00Z')), $this->getTestObject(new \DateTime('1970-01-01T00:00:00Z')), false)
         );
     }
 }
