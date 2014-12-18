@@ -2,6 +2,7 @@
 
 namespace Dothiv\ValueObject\Tests\Entity\ValueObject;
 
+use Dothiv\ValueObject\Exception\InvalidArgumentException;
 use Dothiv\ValueObject\HivDomainValue;
 
 class HivDomainValueTest extends \PHPUnit_Framework_TestCase
@@ -152,6 +153,42 @@ class HivDomainValueTest extends \PHPUnit_Framework_TestCase
         return array(
             array(new HivDomainValue('example.hiv'), new HivDomainValue('example.hiv'), true),
             array(new HivDomainValue('examples.hiv'), new HivDomainValue('example.hiv'), false)
+        );
+    }
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        HivDomainValue
+     *
+     * @param string  $domain
+     * @param boolean $valid
+     *
+     * @dataProvider idnDomainProvider
+     */
+    public function itShouldCheckIDNCharacters($domain, $valid)
+    {
+        try {
+            new HivDomainValue($domain);
+            if (!$valid) {
+                $this->fail("This domain should not be valid: " . $domain);
+            }
+        } catch (InvalidArgumentException $e) {
+            if ($valid) {
+                $this->fail("This domain should be valid: " . $domain);
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function idnDomainProvider()
+    {
+        return array(
+            array("xn--mgb9awbf6b.hiv", false), // عُمان (oman)
+            array("xn--pdam11a.hiv", true), // øþš.hiv
+            array('xn--brger-kva.hiv', true), // bürger.hiv
         );
     }
 }
