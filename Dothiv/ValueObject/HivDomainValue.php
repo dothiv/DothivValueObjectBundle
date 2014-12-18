@@ -48,7 +48,7 @@ class HivDomainValue extends AbstractValueObject implements ValueObjectInterface
         $pattern    = '/^[' . static::ALLOWED_CHARS_NO_DASH . '][-' . static::ALLOWED_CHARS_NO_DASH . ']{1,61}[' . static::ALLOWED_CHARS_NO_DASH . ']\.hiv$/u';
         $domainUTF8 = idn_to_utf8($domain);
         if (!preg_match($pattern, $domainUTF8)) {
-            throw new InvalidArgumentException(sprintf('hiv domain name contains invalid characters: "%s"!', $domainUTF8));
+            throw new InvalidArgumentException(sprintf('hiv domain name contains invalid characters: "%s"!', $domain));
         }
 
         $this->domain = $domain;

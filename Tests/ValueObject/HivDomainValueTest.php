@@ -177,6 +177,7 @@ class HivDomainValueTest extends \PHPUnit_Framework_TestCase
             if ($valid) {
                 $this->fail("This domain should be valid: " . $domain);
             }
+            $this->assertEquals('hiv domain name contains invalid characters: "' . $domain . '"!', $e->getMessage());
         }
     }
 
