@@ -33,7 +33,7 @@ class EmailValue extends AbstractValueObject implements ValueObjectInterface
             return;
         }
 
-        $valid = filter_var($email, FILTER_VALIDATE_EMAIL);
+        $valid = filter_var(idn_to_ascii($email), FILTER_VALIDATE_EMAIL);
         if (!$valid) {
             throw new InvalidArgumentException(sprintf('Invalid email value provided: "%s"!', $email));
         }

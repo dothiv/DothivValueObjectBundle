@@ -109,6 +109,33 @@ class EmailValueTest extends \PHPUnit_Framework_TestCase
             array(new EmailValue('m+extension@click4life.hiv'), new EmailValue('m@click4life.hiv'), false)
         );
     }
+
+
+    /**
+     * @test
+     * @group        ValueObject
+     * @group        EmailValue
+     *
+     * @param string $email
+     *
+     * @dataProvider idnEmailProvider
+     */
+    public function itShouldAcceptIdnHostnames($email)
+    {
+        new EmailValue($email);
+    }
+
+    /**
+     * @return array
+     */
+    public function idnEmailProvider()
+    {
+        return array(
+            array(
+                'jana.müller@müller.de'
+            )
+        );
+    }
 }
 
 
