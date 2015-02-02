@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class W3CDateTimeValue extends AbstractValueObject implements ValueObjectInterface
 {
+
     /**
      * @var \DateTime
      */
@@ -48,5 +49,18 @@ class W3CDateTimeValue extends AbstractValueObject implements ValueObjectInterfa
     public function toScalar()
     {
         return $this->__toString();
+    }
+
+    /**
+     * @param string $date
+     *
+     * @throws InvalidArgumentException If an invalid url is provided.
+     * @return W3CDateTimeValue
+     * @since v1.3.1
+     */
+    public static function create($date)
+    {
+        $class = __CLASS__;
+        return new $class($date);
     }
 }

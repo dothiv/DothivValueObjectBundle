@@ -68,6 +68,20 @@ class W3CDateTimeValueTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     * @group        unit
+     * @group        ValueObject
+     * @depends      itShouldParseADate
+     * @dataProvider provideTestDates
+     */
+    public function itShouldWorkStatically($expected, $arg)
+    {
+        $v = W3CDateTimeValue::create($arg);
+        $this->assertInstanceOf('\Dothiv\ValueObject\W3CDateTimeValue', $v);
+        $this->assertEquals($expected, (string)$v);
+    }
+
+    /**
      * @return array
      */
     public function provideTestDates()
