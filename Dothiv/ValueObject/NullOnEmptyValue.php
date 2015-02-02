@@ -22,8 +22,20 @@ class NullOnEmptyValue extends AbstractValueObject implements ValueObjectInterfa
      * @param mixed|null $value
      *
      * @return NullOnEmptyValue
+     * @deprecated Use NullOnEmptyValue::create($value)
      */
     public static function parse($value = null)
+    {
+        return static::create($value);
+    }
+
+    /**
+     * @param mixed|null $value
+     *
+     * @return NullOnEmptyValue
+     * @since v1.3.1
+     */
+    public static function create($value = null)
     {
         $class = __CLASS__;
         return new $class($value);

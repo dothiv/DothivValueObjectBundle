@@ -23,11 +23,11 @@ class NullOnEmptyValueTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldWorkStatically()
     {
-        $this->assertEquals('some-value', NullOnEmptyValue::parse('some-value'));
-        $this->assertNull(NullOnEmptyValue::parse(' ')->getValue());
-        $this->assertNull(NullOnEmptyValue::parse('')->getValue());
-        $this->assertNull(NullOnEmptyValue::parse()->getValue());
-        $this->assertNull(NullOnEmptyValue::parse(null)->getValue());
+        $this->assertEquals('some-value', NullOnEmptyValue::create('some-value'));
+        $this->assertNull(NullOnEmptyValue::create(' ')->getValue());
+        $this->assertNull(NullOnEmptyValue::create('')->getValue());
+        $this->assertNull(NullOnEmptyValue::create()->getValue());
+        $this->assertNull(NullOnEmptyValue::create(null)->getValue());
     }
 
     /**
