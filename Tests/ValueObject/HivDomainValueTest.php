@@ -9,24 +9,59 @@ class HivDomainValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @group   unit
-     * @group   ValueObject
+     * @group        unit
+     * @group        ValueObject
+     * @dataProvider provideValidDomainNames
+     *
+     * @param string $domain
      */
-    public function itShouldParseADomain()
+    public function itShouldParseADomain($domain)
     {
-        new HivDomainValue('click4life.hiv');
+        new HivDomainValue($domain);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideValidDomainNames()
+    {
+        return array(
+            array('click4life.hiv'),
+            array('abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijk.hiv'), # 63 chars
+            array('on.hiv'), # two letter
+            array('o-n.hiv'), # with dash
+        );
     }
 
     /**
      * @test
-     * @group   unit
-     * @group   ValueObject
-     * @depends itShouldParseADomain
+     * @group        unit
+     * @group        ValueObject
+     * @depends      itShouldParseADomain
      * @expectedException \Dothiv\ValueObject\Exception\InvalidArgumentException
+     * @dataProvider provideInvalidDomainNames
+     *
+     * @param string $domain
      */
-    public function itShouldNotParseAnInvalidDomain()
+    public function itShouldNotParseAnInvalidDomain($domain)
     {
-        new HivDomainValue('bogus');
+        new HivDomainValue($domain);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideInvalidDomainNames()
+    {
+        return array(
+            array('bogus'),
+            array('bogus.com'),
+            array('abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl.hiv'), # 64 chars
+            array('www.example.hiv'), # subdomain
+            array('a.hiv'), # single letter
+            array('a-.hiv'), # trailing dash
+            array('-a.hiv'), # leading dash
+        );
     }
 
     /**

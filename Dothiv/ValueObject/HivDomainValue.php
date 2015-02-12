@@ -39,13 +39,13 @@ class HivDomainValue extends AbstractValueObject implements ValueObjectInterface
         }
 
         $domain = trim(strtolower($domain));
-        $regexp = "/^([a-z0-9]|xn--)(?:[a-z0-9]|-(?!-)){1,62}[a-z0-9]\.hiv$/";
+        $regexp = "/^([a-z0-9]|xn--)(?:[a-z0-9]|-(?!-)){0,62}[a-z0-9]\.hiv$/";
         if (!preg_match($regexp, $domain)) {
             throw new InvalidArgumentException(sprintf('Invalid hiv domain provided: "%s"!', $domain));
         }
 
         // IDN character check
-        $pattern    = '/^[' . static::ALLOWED_CHARS_NO_DASH . '][-' . static::ALLOWED_CHARS_NO_DASH . ']{1,61}[' . static::ALLOWED_CHARS_NO_DASH . ']\.hiv$/u';
+        $pattern    = '/^[' . static::ALLOWED_CHARS_NO_DASH . '][-' . static::ALLOWED_CHARS_NO_DASH . ']{0,61}[' . static::ALLOWED_CHARS_NO_DASH . ']\.hiv$/u';
         $domainUTF8 = idn_to_utf8($domain);
         if (!preg_match($pattern, $domainUTF8)) {
             throw new InvalidArgumentException(sprintf('hiv domain name contains invalid characters: "%s"!', $domain));
